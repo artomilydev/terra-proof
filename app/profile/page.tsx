@@ -16,6 +16,7 @@ export default function ProfilePage() {
 
   const mockNFTs = [
     {
+      id: "mount-fuji-sunrise",
       image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
       title: "Mount Fuji Sunrise",
       location: "Japan",
@@ -25,6 +26,7 @@ export default function ProfilePage() {
       views: 1520,
     },
     {
+      id: "paris-eiffel-tower",
       image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34",
       title: "Paris Eiffel Tower",
       location: "France",
@@ -34,6 +36,7 @@ export default function ProfilePage() {
       views: 980,
     },
     {
+      id: "bali-beach-sunset",
       image: "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9",
       title: "Bali Beach Sunset",
       location: "Indonesia",
@@ -48,36 +51,36 @@ export default function ProfilePage() {
     <div className="flex min-h-screen bg-slate-950">
       <Sidebar />
 
-      <main className="flex-1 ml-64 p-8">
+      <main className="flex-1 lg:ml-64 mt-16 lg:mt-0 p-4 sm:p-6 lg:p-8">
         {/* Profile Header */}
-        <Card variant="gradient" className="mb-8">
-          <div className="flex items-start gap-6">
-            <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-cyan-500 to-purple-500" />
+        <Card variant="gradient" className="mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-cyan-500 to-purple-500" />
 
-            <div className="flex-1">
-              <div className="flex items-start justify-between mb-4">
+            <div className="flex-1 w-full">
+              <div className="flex flex-col sm:flex-row items-start justify-between mb-4 gap-3">
                 <div>
-                  <h1 className="text-2xl font-bold text-white mb-1">
+                  <h1 className="text-xl sm:text-2xl font-bold text-white mb-1">
                     Travel Explorer
                   </h1>
-                  <p className="text-slate-400 font-mono text-sm">
+                  <p className="text-slate-400 font-mono text-xs sm:text-sm">
                     0x742d...4a3b
                   </p>
                 </div>
 
-                <div className="flex gap-2">
-                  <Button variant="outline" size="sm">
-                    <Share2 className="w-4 h-4 mr-2" />
+                <div className="flex gap-2 w-full sm:w-auto">
+                  <Button variant="outline" size="sm" className="flex-1 sm:flex-none">
+                    <Share2 className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                     Share
                   </Button>
-                  <Button variant="secondary" size="sm">
-                    <Settings className="w-4 h-4 mr-2" />
+                  <Button variant="secondary" size="sm" className="flex-1 sm:flex-none">
+                    <Settings className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                     Settings
                   </Button>
                 </div>
               </div>
 
-              <p className="text-slate-300 mb-4">
+              <p className="text-sm sm:text-base text-slate-300 mb-4">
                 Passionate traveler collecting memories from around the world 🌍
               </p>
 
@@ -90,16 +93,16 @@ export default function ProfilePage() {
         </Card>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
           {stats.map((stat) => (
-            <Card key={stat.label} variant="glass" className="p-6">
-              <div className="flex items-center gap-4">
-                <div className="p-3 rounded-xl bg-cyan-500/20">
-                  <stat.icon className="w-6 h-6 text-cyan-400" />
+            <Card key={stat.label} variant="glass" className="p-4 sm:p-6">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="p-2 sm:p-3 rounded-xl bg-cyan-500/20">
+                  <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" />
                 </div>
                 <div>
-                  <p className="text-sm text-slate-400">{stat.label}</p>
-                  <p className="text-2xl font-bold text-white">{stat.value}</p>
+                  <p className="text-xs sm:text-sm text-slate-400">{stat.label}</p>
+                  <p className="text-xl sm:text-2xl font-bold text-white">{stat.value}</p>
                 </div>
               </div>
             </Card>
@@ -108,22 +111,22 @@ export default function ProfilePage() {
 
         {/* NFT Collection */}
         <div>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-white">My Collection</h2>
-            <div className="flex gap-2">
-              <Button variant="ghost" size="sm">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-3">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">My Collection</h2>
+            <div className="flex gap-2 w-full sm:w-auto">
+              <Button variant="ghost" size="sm" className="flex-1 sm:flex-none text-xs sm:text-sm">
                 All
               </Button>
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" className="flex-1 sm:flex-none text-xs sm:text-sm">
                 On Sale
               </Button>
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" className="flex-1 sm:flex-none text-xs sm:text-sm">
                 Favorites
               </Button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {mockNFTs.map((nft, index) => (
               <NFTCard key={index} {...nft} />
             ))}
