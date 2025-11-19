@@ -103,14 +103,18 @@ export default function NFTDetailPage({ params }: { params: { id: string } }) {
                   />
                   <div>
                     <p className="text-xs sm:text-sm text-slate-400">Likes</p>
-                    <p className="text-lg sm:text-xl font-bold text-white">{nft.likes}</p>
+                    <p className="text-lg sm:text-xl font-bold text-white">
+                      {nft.likes}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 sm:gap-3">
                   <Eye className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400" />
                   <div>
                     <p className="text-xs sm:text-sm text-slate-400">Views</p>
-                    <p className="text-lg sm:text-xl font-bold text-white">{nft.views}</p>
+                    <p className="text-lg sm:text-xl font-bold text-white">
+                      {nft.views}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -126,7 +130,9 @@ export default function NFTDetailPage({ params }: { params: { id: string } }) {
                   <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2">
                     {nft.title}
                   </h1>
-                  <p className="text-xs sm:text-sm text-slate-400">{nft.tokenId}</p>
+                  <p className="text-xs sm:text-sm text-slate-400">
+                    {nft.tokenId}
+                  </p>
                 </div>
                 <div className="flex gap-1 sm:gap-2">
                   <Button
@@ -146,7 +152,9 @@ export default function NFTDetailPage({ params }: { params: { id: string } }) {
                 </div>
               </div>
 
-              <p className="text-sm sm:text-base text-slate-300 mb-4 sm:mb-6">{nft.description}</p>
+              <p className="text-sm sm:text-base text-slate-300 mb-4 sm:mb-6">
+                {nft.description}
+              </p>
 
               {/* Location & Date */}
               <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
@@ -165,11 +173,15 @@ export default function NFTDetailPage({ params }: { params: { id: string } }) {
             <Card variant="gradient" className="p-4 sm:p-6">
               <div className="flex items-center justify-between mb-3 sm:mb-4">
                 <div>
-                  <p className="text-xs sm:text-sm text-slate-400 mb-1">Current Price</p>
+                  <p className="text-xs sm:text-sm text-slate-400 mb-1">
+                    Current Price
+                  </p>
                   <p className="text-2xl sm:text-3xl font-bold text-white">
                     {nft.price} SUI
                   </p>
-                  <p className="text-xs sm:text-sm text-slate-500">≈ $42.50 USD</p>
+                  <p className="text-xs sm:text-sm text-slate-500">
+                    ≈ $42.50 USD
+                  </p>
                 </div>
               </div>
 
@@ -178,7 +190,11 @@ export default function NFTDetailPage({ params }: { params: { id: string } }) {
                   <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   Buy Now
                 </Button>
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full sm:w-auto"
+                >
                   Make Offer
                 </Button>
               </div>
@@ -186,11 +202,15 @@ export default function NFTDetailPage({ params }: { params: { id: string } }) {
 
             {/* Owner Info */}
             <Card variant="glass" className="p-4 sm:p-6">
-              <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Owner</h3>
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">
+                Owner
+              </h3>
               <div className="flex items-center gap-3 sm:gap-4">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-cyan-500 to-purple-500" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm sm:text-base font-semibold text-white truncate">{nft.ownerName}</p>
+                  <p className="text-sm sm:text-base font-semibold text-white truncate">
+                    {nft.ownerName}
+                  </p>
                   <p className="text-xs sm:text-sm text-slate-400 font-mono truncate">
                     {nft.owner}
                   </p>
@@ -212,7 +232,9 @@ export default function NFTDetailPage({ params }: { params: { id: string } }) {
               </h3>
               <div className="space-y-2 sm:space-y-3">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
-                  <span className="text-xs sm:text-sm text-slate-400">Verification Score</span>
+                  <span className="text-xs sm:text-sm text-slate-400">
+                    Verification Score
+                  </span>
                   <div className="flex items-center gap-2 w-full sm:w-auto">
                     <div className="w-full sm:w-32 h-2 bg-slate-700 rounded-full overflow-hidden">
                       <div
@@ -280,9 +302,15 @@ export default function NFTDetailPage({ params }: { params: { id: string } }) {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Minter</span>
-                  <span className="text-white font-mono truncate max-w-[150px]">{nft.minter}</span>
+                  <span className="text-white font-mono truncate max-w-[150px]">
+                    {nft.minter}
+                  </span>
                 </div>
-                <Button variant="ghost" size="sm" className="w-full mt-2 text-xs sm:text-sm">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="w-full mt-2 text-xs sm:text-sm"
+                >
                   <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                   View on Explorer
                 </Button>

@@ -69,11 +69,19 @@ export default function ProfilePage() {
                 </div>
 
                 <div className="flex gap-2 w-full sm:w-auto">
-                  <Button variant="outline" size="sm" className="flex-1 sm:flex-none">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex-1 sm:flex-none"
+                  >
                     <Share2 className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                     Share
                   </Button>
-                  <Button variant="secondary" size="sm" className="flex-1 sm:flex-none">
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    className="flex-1 sm:flex-none"
+                  >
                     <Settings className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                     Settings
                   </Button>
@@ -101,8 +109,12 @@ export default function ProfilePage() {
                   <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" />
                 </div>
                 <div>
-                  <p className="text-xs sm:text-sm text-slate-400">{stat.label}</p>
-                  <p className="text-xl sm:text-2xl font-bold text-white">{stat.value}</p>
+                  <p className="text-xs sm:text-sm text-slate-400">
+                    {stat.label}
+                  </p>
+                  <p className="text-xl sm:text-2xl font-bold text-white">
+                    {stat.value}
+                  </p>
                 </div>
               </div>
             </Card>
@@ -112,15 +124,29 @@ export default function ProfilePage() {
         {/* NFT Collection */}
         <div>
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-3">
-            <h2 className="text-xl sm:text-2xl font-bold text-white">My Collection</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
+              My Collection
+            </h2>
             <div className="flex gap-2 w-full sm:w-auto">
-              <Button variant="ghost" size="sm" className="flex-1 sm:flex-none text-xs sm:text-sm">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex-1 sm:flex-none text-xs sm:text-sm"
+              >
                 All
               </Button>
-              <Button variant="ghost" size="sm" className="flex-1 sm:flex-none text-xs sm:text-sm">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex-1 sm:flex-none text-xs sm:text-sm"
+              >
                 On Sale
               </Button>
-              <Button variant="ghost" size="sm" className="flex-1 sm:flex-none text-xs sm:text-sm">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex-1 sm:flex-none text-xs sm:text-sm"
+              >
                 Favorites
               </Button>
             </div>

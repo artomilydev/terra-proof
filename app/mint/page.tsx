@@ -131,7 +131,9 @@ export default function MintPage() {
               <div className="relative mb-4 sm:mb-6">
                 <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 sm:border-8 border-slate-700 mx-auto flex items-center justify-center">
                   <div className="text-center">
-                    <p className="text-3xl sm:text-4xl font-bold text-cyan-400">{score}</p>
+                    <p className="text-3xl sm:text-4xl font-bold text-cyan-400">
+                      {score}
+                    </p>
                     <p className="text-xs text-slate-400">/ 100</p>
                   </div>
                 </div>
@@ -161,10 +163,15 @@ export default function MintPage() {
               </h3>
 
               <div className="aspect-square rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center mb-4">
-                <p className="text-sm sm:text-base text-slate-500">No image uploaded</p>
+                <p className="text-sm sm:text-base text-slate-500">
+                  No image uploaded
+                </p>
               </div>
 
-              <Badge variant="info" className="w-full justify-center text-xs sm:text-sm">
+              <Badge
+                variant="info"
+                className="w-full justify-center text-xs sm:text-sm"
+              >
                 Upload photo to preview
               </Badge>
             </Card>

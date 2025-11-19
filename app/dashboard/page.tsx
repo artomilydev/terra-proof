@@ -55,8 +55,12 @@ export default function DashboardPage() {
       <main className="flex-1 lg:ml-64 p-4 sm:p-6 lg:p-8">
         {/* Header */}
         <div className="mb-6 lg:mb-8 mt-16 lg:mt-0">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Dashboard</h1>
-          <p className="text-sm sm:text-base text-slate-400">Welcome back to your travel journey</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+            Dashboard
+          </h1>
+          <p className="text-sm sm:text-base text-slate-400">
+            Welcome back to your travel journey
+          </p>
         </div>
 
         {/* Stats Grid */}
@@ -65,11 +69,19 @@ export default function DashboardPage() {
             <Card key={stat.label} variant="glass" className="p-4 sm:!p-6">
               <div className="flex flex-col sm:flex-row items-start justify-between gap-2 sm:gap-0">
                 <div>
-                  <p className="text-xs sm:text-sm text-slate-400 mb-1">{stat.label}</p>
-                  <p className="text-xl sm:text-3xl font-bold text-white">{stat.value}</p>
+                  <p className="text-xs sm:text-sm text-slate-400 mb-1">
+                    {stat.label}
+                  </p>
+                  <p className="text-xl sm:text-3xl font-bold text-white">
+                    {stat.value}
+                  </p>
                 </div>
-                <div className={`p-2 sm:p-3 rounded-xl bg-${stat.color}-500/20`}>
-                  <stat.icon className={`w-4 h-4 sm:w-6 sm:h-6 text-${stat.color}-400`} />
+                <div
+                  className={`p-2 sm:p-3 rounded-xl bg-${stat.color}-500/20`}
+                >
+                  <stat.icon
+                    className={`w-4 h-4 sm:w-6 sm:h-6 text-${stat.color}-400`}
+                  />
                 </div>
               </div>
             </Card>

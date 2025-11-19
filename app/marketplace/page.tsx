@@ -93,7 +93,9 @@ export default function MarketplacePage() {
       <main className="flex-1 lg:ml-64 p-4 sm:p-6 lg:p-8">
         {/* Header */}
         <div className="mb-6 lg:mb-8 mt-16 lg:mt-0">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Marketplace</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+            Marketplace
+          </h1>
           <p className="text-sm sm:text-base text-slate-400">
             Discover and collect unique travel proof NFTs
           </p>
@@ -136,7 +138,9 @@ export default function MarketplacePage() {
               <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400" />
               <div>
                 <p className="text-xs sm:text-sm text-slate-400">Floor Price</p>
-                <p className="text-xl sm:text-2xl font-bold text-white">5.2 SUI</p>
+                <p className="text-xl sm:text-2xl font-bold text-white">
+                  5.2 SUI
+                </p>
               </div>
             </div>
           </Card>
@@ -145,8 +149,12 @@ export default function MarketplacePage() {
             <div className="flex items-center gap-3">
               <MapPin className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400" />
               <div>
-                <p className="text-xs sm:text-sm text-slate-400">Total Listings</p>
-                <p className="text-xl sm:text-2xl font-bold text-white">2,847</p>
+                <p className="text-xs sm:text-sm text-slate-400">
+                  Total Listings
+                </p>
+                <p className="text-xl sm:text-2xl font-bold text-white">
+                  2,847
+                </p>
               </div>
             </div>
           </Card>
@@ -156,7 +164,9 @@ export default function MarketplacePage() {
               <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-400" />
               <div>
                 <p className="text-xs sm:text-sm text-slate-400">24h Volume</p>
-                <p className="text-xl sm:text-2xl font-bold text-white">1,234 SUI</p>
+                <p className="text-xl sm:text-2xl font-bold text-white">
+                  1,234 SUI
+                </p>
               </div>
             </div>
           </Card>
