@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: "TerraProof - Blockchain-Trending Travel Authenticity",
   description:
     "Turn your travel moments into verifiable digital assets. Mint, trade, and collect authenticated travel proofs on the blockchain.",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({
