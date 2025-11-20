@@ -23,6 +23,7 @@ import {
   GlowingStarsTitle,
 } from "@/components/ui/GlowingStars";
 import { DraggableCardStack } from "@/components/ui/DraggableCards";
+import WorldMap from "@/components/ui/WorldMap";
 import Image from "next/image";
 
 export default function Home() {
@@ -106,7 +107,7 @@ export default function Home() {
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-slate-900/50 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 sm:gap-3">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg shadow-cyan-500/50">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-linear-to-br from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg shadow-cyan-500/50">
               <Image
                 src="/logo.svg"
                 alt="TerraProof Logo"
@@ -114,13 +115,13 @@ export default function Home() {
                 height={32}
               />
             </div>
-            <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="text-lg sm:text-xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               TerraProof
             </span>
           </Link>
           <Link
             href="/dashboard"
-            className="px-4 py-2 sm:px-6 text-sm sm:text-base bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300"
+            className="px-4 py-2 sm:px-6 text-sm sm:text-base bg-linear-to-r from-cyan-500 to-blue-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300"
           >
             Launch App
           </Link>
@@ -146,7 +147,7 @@ export default function Home() {
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 bg-linear-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
               Your Journey,
               <br />
               Permanently Proven
@@ -160,7 +161,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
               <Link
                 href="/dashboard"
-                className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-xl text-base sm:text-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 inline-flex items-center justify-center gap-2"
+                className="px-6 sm:px-8 py-3 sm:py-4 bg-linear-to-r from-cyan-500 to-blue-500 text-white rounded-xl text-base sm:text-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 inline-flex items-center justify-center gap-2"
               >
                 Start Minting
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -175,6 +176,101 @@ export default function Home() {
           </motion.div>
         </LampContainer>
       </div>
+
+      {/* Global Reach Section with World Map */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-slate-950 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12 sm:mb-16"
+          >
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              Global Connectivity
+            </h2>
+            <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto">
+              Break free from traditional boundaries. Mint your travel proofs
+              from anywhere in the world.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="relative"
+          >
+            <WorldMap
+              dots={[
+                {
+                  start: {
+                    lat: 64.2008,
+                    lng: -149.4937,
+                  }, // Alaska (Fairbanks)
+                  end: {
+                    lat: 34.0522,
+                    lng: -118.2437,
+                  }, // Los Angeles
+                },
+                {
+                  start: { lat: 64.2008, lng: -149.4937 }, // Alaska (Fairbanks)
+                  end: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
+                },
+                {
+                  start: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
+                  end: { lat: 38.7223, lng: -9.1393 }, // Lisbon
+                },
+                {
+                  start: { lat: 51.5074, lng: -0.1278 }, // London
+                  end: { lat: 28.6139, lng: 77.209 }, // New Delhi
+                },
+                {
+                  start: { lat: 28.6139, lng: 77.209 }, // New Delhi
+                  end: { lat: 43.1332, lng: 131.9113 }, // Vladivostok
+                },
+                {
+                  start: { lat: 28.6139, lng: 77.209 }, // New Delhi
+                  end: { lat: -1.2921, lng: 36.8219 }, // Nairobi
+                },
+              ]}
+              lineColor="#06b6d4"
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-12 sm:mt-16"
+          >
+            <div className="text-center">
+              <div className="text-3xl sm:text-4xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">
+                195+
+              </div>
+              <div className="text-slate-400 text-sm sm:text-base">
+                Countries Supported
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl sm:text-4xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">
+                24/7
+              </div>
+              <div className="text-slate-400 text-sm sm:text-base">
+                Always Available
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl sm:text-4xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">
+                &lt;2s
+              </div>
+              <div className="text-slate-400 text-sm sm:text-base">
+                Mint Speed
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Features Section with Hover Effect */}
       <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-slate-950 relative">
@@ -197,7 +293,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="text-center mb-8 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               Why TerraProof?
             </h2>
             <p className="text-base sm:text-xl text-slate-400 max-w-2xl mx-auto px-4">
@@ -218,7 +314,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               How It Works
             </h2>
             <p className="text-base sm:text-xl text-slate-400 max-w-2xl mx-auto px-4">
@@ -231,7 +327,7 @@ export default function Home() {
             {/* Step 1 */}
             <GlowingStarsBackgroundCard className="p-6 sm:p-8">
               <div className="flex items-center gap-4 mb-6">
-                <div className="bg-gradient-to-br from-cyan-500 to-blue-500 w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center shadow-lg shadow-cyan-500/50">
+                <div className="bg-linear-to-br from-cyan-500 to-blue-500 w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center shadow-lg shadow-cyan-500/50">
                   <Globe className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                 </div>
                 <span className="text-3xl sm:text-4xl font-bold text-cyan-400">
@@ -250,7 +346,7 @@ export default function Home() {
             {/* Step 2 */}
             <GlowingStarsBackgroundCard className="p-6 sm:p-8">
               <div className="flex items-center gap-4 mb-6">
-                <div className="bg-gradient-to-br from-blue-500 to-purple-500 w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/50">
+                <div className="bg-linear-to-br from-blue-500 to-purple-500 w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/50">
                   <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                 </div>
                 <span className="text-3xl sm:text-4xl font-bold text-blue-400">
@@ -269,7 +365,7 @@ export default function Home() {
             {/* Step 3 */}
             <GlowingStarsBackgroundCard className="p-6 sm:p-8">
               <div className="flex items-center gap-4 mb-6">
-                <div className="bg-gradient-to-br from-purple-500 to-cyan-500 w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/50">
+                <div className="bg-linear-to-br from-purple-500 to-cyan-500 w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/50">
                   <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                 </div>
                 <span className="text-3xl sm:text-4xl font-bold text-purple-400">
@@ -302,14 +398,14 @@ export default function Home() {
           />
         </div>
 
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="w-full mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               Trending Travel Proofs
             </h2>
             <p className="text-base sm:text-xl text-slate-400 max-w-2xl mx-auto px-4">
@@ -322,12 +418,12 @@ export default function Home() {
             <DraggableCardStack items={trendingNFTs} />
           </div>
 
-          <div className="text-center">
+          <div className="text-center mt-12">
             <Link
               href="/marketplace"
-              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-slate-800/50 border border-slate-700 text-cyan-400 rounded-xl text-base sm:text-lg font-semibold hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 backdrop-blur-sm"
+              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-linear-to-r from-cyan-500 to-blue-500 text-white rounded-xl text-base sm:text-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300"
             >
-              View All NFTs
+              Discover NFTs
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </Link>
           </div>
@@ -344,7 +440,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-2xl text-center"
             >
-              <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">
+              <div className="text-4xl sm:text-5xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">
                 1,234
               </div>
               <div className="text-sm sm:text-base text-slate-400">
@@ -358,7 +454,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-2xl text-center"
             >
-              <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
+              <div className="text-4xl sm:text-5xl font-bold bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
                 567
               </div>
               <div className="text-sm sm:text-base text-slate-400">
@@ -372,7 +468,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-2xl text-center"
             >
-              <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+              <div className="text-4xl sm:text-5xl font-bold bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2">
                 89
               </div>
               <div className="text-sm sm:text-base text-slate-400">
@@ -384,7 +480,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 relative overflow-hidden">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-linear-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.1),transparent_50%)]" />
         </div>
@@ -395,7 +491,7 @@ export default function Home() {
           transition={{ duration: 0.5 }}
           className="max-w-4xl mx-auto text-center relative z-10"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-linear-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4 sm:mb-6">
             Ready to Start Your Journey?
           </h2>
           <p className="text-base sm:text-xl text-slate-400 mb-6 sm:mb-8 px-4">
@@ -404,7 +500,7 @@ export default function Home() {
           </p>
           <Link
             href="/dashboard"
-            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-xl text-base sm:text-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-linear-to-r from-cyan-500 to-blue-500 text-white rounded-xl text-base sm:text-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300"
           >
             Mint Your First Proof
             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -419,10 +515,10 @@ export default function Home() {
             {/* About */}
             <div className="space-y-4">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center">
+                <div className="w-8 h-8 bg-linear-to-br from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center">
                   <Globe className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-lg font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                <span className="text-lg font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                   TerraProof
                 </span>
               </div>
