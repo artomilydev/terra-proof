@@ -167,10 +167,12 @@ export default function Home() {
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </Link>
               <Link
-                href="/marketplace"
+                href="https://terra-proof.gitbook.io/terra-proof-docs/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-6 sm:px-8 py-3 sm:py-4 bg-slate-800/50 border border-slate-700 text-cyan-400 rounded-xl text-base sm:text-lg font-semibold hover:border-cyan-500/50 transition-all duration-300 inline-flex items-center justify-center gap-2 backdrop-blur-sm"
               >
-                Explore Marketplace
+                Read Docs
               </Link>
             </div>
           </motion.div>
@@ -565,7 +567,9 @@ export default function Home() {
               <ul className="space-y-2">
                 <li>
                   <a
-                    href="#"
+                    href="https://terra-proof.gitbook.io/terra-proof-docs/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-slate-400 hover:text-cyan-400 text-sm transition-colors"
                   >
                     Documentation
