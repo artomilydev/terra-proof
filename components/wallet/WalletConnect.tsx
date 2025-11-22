@@ -16,8 +16,12 @@ export function WalletConnect() {
             Connect Wallet
           </Button>
         }
-        connectedText={account?.address ? `${account.address.slice(0, 6)}...${account.address.slice(-4)}` : "Connected"}
       />
+      {account && (
+        <div className="text-xs text-slate-400 mt-2 text-center font-mono">
+          {account.address.slice(0, 6)}...{account.address.slice(-4)}
+        </div>
+      )}
     </div>
   );
 }
