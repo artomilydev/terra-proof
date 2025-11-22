@@ -2,9 +2,13 @@
 
 import { Card } from "../ui/Card";
 import { Badge } from "../ui/Badge";
-import { MapPin, Heart, Eye, TrendingUp } from "lucide-react";
+import { Button } from "../ui/Button";
+import { MapPin, Heart, Eye, TrendingUp, ShoppingCart, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useState } from "react";
+import { useCurrentAccount, useSignAndExecuteTransaction } from "@mysten/dapp-kit";
+import { buyNFT } from "@/lib/sui/nft";
 
 interface NFTCardProps {
   id?: string;
@@ -17,7 +21,9 @@ interface NFTCardProps {
   views: number;
   price?: string;
   owner?: string;
+  ownerAddress?: string;
   className?: string;
+  showBuyButton?: boolean;
 }
 
 export function NFTCard({
@@ -31,9 +37,51 @@ export function NFTCard({
   views,
   price,
   owner,
+  ownerAddress,
   className,
+  showBuyButton = false,
 }: NFTCardProps) {
+  const account = useCurrentAccount();
+  const { mutate: signAndExecute } = useSignAndExecuteTransaction();
+  const [isBuying, setIsBuying] = useState(false);
+
   const nftId = id || title.toLowerCase().replace(/\s+/g, "-");
+
+  const handleBuyNFT = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!account) {
+      alert("Please connect your Sui wallet first!");
+      return;
+    }
+
+    if (!price || !ownerAddress || !id) {
+      alert("Invalid NFT data!");
+      return;
+    }
+
+    setIsBuying(true);
+
+    try {
+      const txDigest = await buyNFT(
+        {
+          nftId: id,
+          price: parseFloat(price),
+          seller: ownerAddress,
+        },
+        signAndExecute
+      );
+
+      alert(`NFT purchased successfully! Transaction: ${txDigest}`);
+      window.location.reload();
+    } catch (error) {
+      console.error("Error buying NFT:", error);
+      alert("Failed to buy NFT. Please try again.");
+    } finally {
+      setIsBuying(false);
+    }
+  };
 
   return (
     <Link href={`/nft/${nftId}`}>
@@ -51,7 +99,7 @@ export function NFTCard({
           />
 
           {/* Overlay on hover */}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <div className="absolute inset-0 bg-linear-t from-slate-900 via-slate-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
             <div className="text-white">
               <p className="text-sm font-medium">View Details</p>
             </div>
@@ -96,16 +144,40 @@ export function NFTCard({
 
           {/* Price & Owner */}
           {price && (
-            <div className="flex items-center justify-between pt-3 border-t border-slate-700/50">
-              <div>
-                <p className="text-xs text-slate-500">Price</p>
-                <p className="font-semibold text-cyan-400">{price} SUI</p>
-              </div>
-              {owner && (
-                <div className="text-right">
-                  <p className="text-xs text-slate-500">Owner</p>
-                  <p className="text-sm text-white">{owner}</p>
+            <div className="pt-3 border-t border-slate-700/50">
+              <div className="flex items-center justify-between mb-3">
+                <div>
+                  <p className="text-xs text-slate-500">Price</p>
+                  <p className="font-semibold text-cyan-400">{price} SUI</p>
                 </div>
+                {owner && (
+                  <div className="text-right">
+                    <p className="text-xs text-slate-500">Owner</p>
+                    <p className="text-sm text-white">{owner}</p>
+                  </div>
+                )}
+              </div>
+
+              {showBuyButton && account?.address !== ownerAddress && (
+                <Button
+                  variant="primary"
+                  size="sm"
+                  className="w-full"
+                  onClick={handleBuyNFT}
+                  disabled={isBuying}
+                >
+                  {isBuying ? (
+                    <>
+                      <Loader2 className="w-3 h-3 mr-2 animate-spin" />
+                      Buying...
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingCart className="w-3 h-3 mr-2" />
+                      Buy Now
+                    </>
+                  )}
+                </Button>
               )}
             </div>
           )}

@@ -23,6 +23,7 @@ export default function MarketplacePage() {
       views: 1520,
       price: "12.5",
       owner: "0x742d...4a3b",
+      ownerAddress: "0x742d35a8c9f1b2e4d6a7c8f9d0e1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d74a3b",
     },
     {
       id: "paris-eiffel-tower",
@@ -35,6 +36,7 @@ export default function MarketplacePage() {
       views: 980,
       price: "8.3",
       owner: "0x9a2c...7d1e",
+      ownerAddress: "0x9a2c4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b7d1e",
     },
     {
       id: "bali-beach-sunset",
@@ -47,6 +49,7 @@ export default function MarketplacePage() {
       views: 720,
       price: "5.7",
       owner: "0x3f8b...2c9a",
+      ownerAddress: "0x3f8b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f2c9a",
     },
     {
       id: "swiss-alps",
@@ -59,6 +62,7 @@ export default function MarketplacePage() {
       views: 1120,
       price: "15.2",
       owner: "0x5d1a...8e4f",
+      ownerAddress: "0x5d1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e8e4f",
     },
     {
       id: "santorini-sunset",
@@ -71,6 +75,7 @@ export default function MarketplacePage() {
       views: 1890,
       price: "18.9",
       owner: "0x7c3e...9b2d",
+      ownerAddress: "0x7c3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c9b2d",
     },
     {
       id: "new-zealand-peak",
@@ -83,6 +88,7 @@ export default function MarketplacePage() {
       views: 920,
       price: "11.4",
       owner: "0x2a9f...6c1b",
+      ownerAddress: "0x2a9f3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e6c1b",
     },
   ];
 
@@ -175,7 +181,7 @@ export default function MarketplacePage() {
         {/* NFT Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {mockNFTs.map((nft, index) => (
-            <NFTCard key={index} {...nft} />
+            <NFTCard key={index} {...nft} showBuyButton={true} />
           ))}
         </div>
 

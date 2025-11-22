@@ -119,3 +119,20 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom styles for Sui Wallet Connect Button */
+.wallet-connect button {
+  @apply w-full;
+}
+
+.wallet-connect [data-dui-button] {
+  @apply w-full px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-white font-medium transition-all duration-200;
+}
+
+.wallet-connect [data-dui-dropdown] {
+  @apply bg-slate-800 border border-slate-700 rounded-xl shadow-xl;
+}
+
+.wallet-connect [data-dui-dropdown-item] {
+  @apply text-white hover:bg-slate-700 px-4 py-2;
+}
