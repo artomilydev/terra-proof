@@ -1,10 +1,11 @@
 // Unified Storage Interface
 // Support multiple storage backends: Walrus, IPFS, etc.
 
-import { uploadToWalrus, uploadMetadataToWalrus, type WalrusUploadResponse } from "../sui/walrus";
-import { uploadToIPFS, uploadMetadataIPFS, type IPFSUploadResponse } from "./ipfs-client";
+import { uploadToWalrus, uploadMetadataWalrus } from "./walrus-client";
+import { uploadToIPFS, uploadMetadataIPFS } from "./ipfs-client";
 import { testPinataConnection as testPinata } from "./ipfs";
-import { NFTMetadata } from "../sui/walrus";
+import type { WalrusUploadResponse, NFTMetadata } from "./walrus";
+import type { IPFSUploadResponse } from "./ipfs";
 
 export type StorageProvider = "walrus" | "ipfs";
 
@@ -60,7 +61,7 @@ export async function uploadMetadata(
 
   try {
     if (STORAGE_PROVIDER === "walrus") {
-      const result = await uploadMetadataToWalrus(metadata);
+      const result = await uploadMetadataWalrus(metadata);
       return {
         id: result.blobId,
         url: result.url,

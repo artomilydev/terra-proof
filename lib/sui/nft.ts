@@ -66,35 +66,42 @@ export async function mintNFT(
     tx.moveCall({
       target: `${NFT_PACKAGE_ID}::terra_proof_nft::mint`,
       arguments: [
-        tx.pure.string(params.name),
-        tx.pure.string(params.description),
-        tx.pure.string(metadataUpload.url),
-        tx.pure.string(params.location),
-        tx.pure.string(params.date),
-        tx.pure.string(params.category),
-        tx.pure.u64(params.price * 1_000_000_000), // Convert to MIST (1 SUI = 1_000_000_000 MIST)
+        tx.pure.vector("u8", Array.from(new TextEncoder().encode(params.name))),
+        tx.pure.vector("u8", Array.from(new TextEncoder().encode(params.description))),
+        tx.pure.vector("u8", Array.from(new TextEncoder().encode(metadataUpload.url))),
+        tx.pure.vector("u8", Array.from(new TextEncoder().encode(params.location))),
+        tx.pure.vector("u8", Array.from(new TextEncoder().encode(params.date))),
+        tx.pure.vector("u8", Array.from(new TextEncoder().encode(params.category))),
+        tx.pure.u64(Math.floor(params.price * 1_000_000_000)), // Convert to MIST (1 SUI = 1_000_000_000 MIST)
         tx.pure.u8(params.verificationScore),
       ],
     });
 
     // 5. Sign and execute transaction
     console.log("⛓️  Minting NFT on Sui blockchain...");
-    const result = await signAndExecute(
-      {
-        transaction: tx,
-      },
-      {
-        onSuccess: (result: any) => {
-          console.log("✅ NFT minted successfully:", result);
+    console.log("⏳ Waiting for wallet approval...");
+    
+    return new Promise((resolve, reject) => {
+      signAndExecute(
+        {
+          transaction: tx,
         },
-      }
-    );
-
-    console.log(`🎉 NFT Minted! Transaction: ${result.digest}`);
-    console.log(`📦 Storage: ${imageUpload.provider.toUpperCase()}`);
-    return result.digest;
+        {
+          onSuccess: (result: any) => {
+            console.log("✅ Transaction confirmed!");
+            console.log(`🎉 NFT Minted! Transaction: ${result.digest}`);
+            console.log(`📦 Storage: ${imageUpload.provider.toUpperCase()}`);
+            resolve(result.digest);
+          },
+          onError: (error: any) => {
+            console.error("❌ Transaction failed:", error);
+            reject(error);
+          },
+        }
+      );
+    });
   } catch (error) {
-    console.error("Error minting NFT:", error);
+    console.error("❌ Error in mint process:", error);
     throw error;
   }
 }
@@ -125,21 +132,29 @@ export async function buyNFT(
     });
 
     // Sign and execute transaction
-    console.log("Buying NFT...");
-    const result = await signAndExecute(
-      {
-        transaction: tx,
-      },
-      {
-        onSuccess: (result: any) => {
-          console.log("NFT purchased successfully:", result);
+    console.log("💰 Buying NFT...");
+    console.log("⏳ Waiting for wallet approval...");
+    
+    return new Promise((resolve, reject) => {
+      signAndExecute(
+        {
+          transaction: tx,
         },
-      }
-    );
-
-    return result.digest;
+        {
+          onSuccess: (result: any) => {
+            console.log("✅ Transaction confirmed!");
+            console.log("🎉 NFT purchased successfully!");
+            resolve(result.digest);
+          },
+          onError: (error: any) => {
+            console.error("❌ Transaction failed:", error);
+            reject(error);
+          },
+        }
+      );
+    });
   } catch (error) {
-    console.error("Error buying NFT:", error);
+    console.error("❌ Error buying NFT:", error);
     throw error;
   }
 }
@@ -163,20 +178,29 @@ export async function listNFT(
       ],
     });
 
-    const result = await signAndExecute(
-      {
-        transaction: tx,
-      },
-      {
-        onSuccess: (result: any) => {
-          console.log("NFT listed successfully:", result);
+    console.log("🏷️  Listing NFT...");
+    console.log("⏳ Waiting for wallet approval...");
+    
+    return new Promise((resolve, reject) => {
+      signAndExecute(
+        {
+          transaction: tx,
         },
-      }
-    );
-
-    return result.digest;
+        {
+          onSuccess: (result: any) => {
+            console.log("✅ Transaction confirmed!");
+            console.log("🎉 NFT listed successfully!");
+            resolve(result.digest);
+          },
+          onError: (error: any) => {
+            console.error("❌ Transaction failed:", error);
+            reject(error);
+          },
+        }
+      );
+    });
   } catch (error) {
-    console.error("Error listing NFT:", error);
+    console.error("❌ Error listing NFT:", error);
     throw error;
   }
 }

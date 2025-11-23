@@ -82,6 +82,8 @@ export default function MintPage() {
     setIsMinting(true);
 
     try {
+      console.log("🚀 Starting mint process...");
+      
       const txDigest = await mintNFT(
         {
           name: formData.title,
@@ -96,13 +98,19 @@ export default function MintPage() {
         signAndExecute
       );
 
-      alert(`NFT minted successfully! Transaction: ${txDigest}`);
+      console.log("✅ Mint successful! Digest:", txDigest);
       
-      // Redirect to profile or marketplace
+      // Success message
+      alert(`🎉 NFT minted successfully!\n\nTransaction: ${txDigest}\n\nRedirecting to your profile...`);
+      
+      // Redirect to profile
       router.push("/profile");
     } catch (error) {
-      console.error("Error minting NFT:", error);
-      alert("Failed to mint NFT. Please try again.");
+      console.error("❌ Error minting NFT:", error);
+      
+      // Better error message
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      alert(`❌ Failed to mint NFT\n\nError: ${errorMessage}\n\nPlease check:\n- Wallet is connected\n- You have enough SUI for gas\n- Network connection is stable`);
     } finally {
       setIsMinting(false);
     }

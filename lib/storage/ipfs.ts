@@ -4,6 +4,7 @@
 // Ini harus di server karena Pinata SDK menggunakan Node.js 'fs' module
 
 import pinataSDK from "@pinata/sdk";
+import { Readable } from "stream";
 
 // Initialize Pinata (hanya di server)
 const pinata = new pinataSDK({
@@ -13,6 +14,7 @@ const pinata = new pinataSDK({
 
 export interface IPFSUploadResponse {
   ipfsHash: string;
+  hash: string; // Alias for unified interface
   url: string;
   size: number;
 }
@@ -21,7 +23,7 @@ export interface IPFSUploadResponse {
  * Server Action: Upload file ke IPFS via Pinata
  */
 export async function uploadFileToIPFS(
-  fileData: Buffer,
+  fileData: ArrayBuffer | Uint8Array | number[],
   fileName: string
 ): Promise<IPFSUploadResponse> {
   try {
@@ -29,14 +31,26 @@ export async function uploadFileToIPFS(
       throw new Error("Pinata API keys not configured");
     }
 
-    // Create a readable stream-like object from Buffer
-    const stream = {
-      buffer: fileData,
-      originalname: fileName,
-    };
+    // Convert to Buffer properly
+    let buffer: Buffer;
+    if (Array.isArray(fileData)) {
+      buffer = Buffer.from(fileData);
+    } else if (fileData instanceof ArrayBuffer) {
+      buffer = Buffer.from(fileData);
+    } else if (fileData instanceof Uint8Array) {
+      buffer = Buffer.from(fileData);
+    } else {
+      // Fallback: convert object to array
+      buffer = Buffer.from(Object.values(fileData));
+    }
+
+    console.log(`📤 [IPFS Server] Uploading ${fileName} (${buffer.length} bytes)`);
+
+    // Create readable stream from Buffer
+    const readableStream = Readable.from(buffer);
 
     // Upload to IPFS
-    const result = await pinata.pinFileToIPFS(stream as any, {
+    const result = await pinata.pinFileToIPFS(readableStream, {
       pinataMetadata: {
         name: fileName,
       },
@@ -49,13 +63,18 @@ export async function uploadFileToIPFS(
       throw new Error("Failed to upload to IPFS - no hash returned");
     }
 
+    console.log(`✅ [IPFS Server] Upload successful!`);
+    console.log(`   Hash: ${result.IpfsHash}`);
+    console.log(`   Size: ${result.PinSize} bytes`);
+
     return {
       ipfsHash: result.IpfsHash,
+      hash: result.IpfsHash, // Alias for unified interface
       url: `https://gateway.pinata.cloud/ipfs/${result.IpfsHash}`,
-      size: result.PinSize || 0,
+      size: result.PinSize,
     };
   } catch (error) {
-    console.error("❌ Error uploading to IPFS:", error);
+    console.error("❌ [IPFS Server] Error uploading to IPFS:", error);
     throw error;
   }
 }
@@ -86,6 +105,7 @@ export async function uploadMetadataToIPFS(
 
     return {
       ipfsHash: result.IpfsHash,
+      hash: result.IpfsHash, // Alias for unified interface
       url: `https://gateway.pinata.cloud/ipfs/${result.IpfsHash}`,
       size: result.PinSize || 0,
     };

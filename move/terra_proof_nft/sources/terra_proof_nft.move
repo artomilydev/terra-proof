@@ -25,7 +25,7 @@ module terra_proof::terra_proof_nft {
     }
 
     /// Marketplace listing
-    public struct Listing has key {
+    public struct Listing has key, store {
         id: UID,
         nft_id: ID,
         seller: address,

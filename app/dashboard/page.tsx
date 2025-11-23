@@ -3,6 +3,7 @@
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { WalletConnect } from "@/components/wallet/WalletConnect";
 import { useCurrentAccount } from "@mysten/dapp-kit";
 import { Award, MapPin, Loader2, PlusCircle, Compass } from "lucide-react";
 import Link from "next/link";
@@ -77,13 +78,18 @@ export default function DashboardPage() {
         </div>
 
         {!account ? (
-          <Card variant="glass" className="p-8 text-center">
-            <h2 className="text-xl font-bold text-white mb-4">
-              Connect Your Wallet
-            </h2>
-            <p className="text-slate-400 mb-6">
-              Connect your Sui wallet to start minting and managing your travel proof NFTs
-            </p>
+          <Card variant="glass" className="p-8 sm:p-12 text-center">
+            <div className="max-w-md mx-auto">
+              <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
+                Connect Your Wallet
+              </h2>
+              <p className="text-slate-400 mb-8">
+                Connect your Sui wallet to start minting and managing your travel proof NFTs
+              </p>
+              <div className="flex justify-center">
+                <WalletConnect />
+              </div>
+            </div>
           </Card>
         ) : (
           <>

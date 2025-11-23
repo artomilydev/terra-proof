@@ -14,6 +14,9 @@
 /coverage
 /docs
 
+# Move build artifacts
+move/terra_proof_nft/build/
+
 # next.js
 /.next/
 /out/
@@ -33,6 +36,12 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+
+# deployment info (contains sensitive package IDs and addresses)
+DEPLOYMENT.md
+
+# test files
+test-pinata.js
 
 # vercel
 .vercel

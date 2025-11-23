@@ -13,17 +13,28 @@ import {
  */
 export async function uploadToIPFS(file: File): Promise<IPFSUploadResponse> {
   try {
-    console.log(`📤 Converting file to buffer...`);
-    const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
+    // Validate file size (max 10MB untuk testing)
+    const maxSize = 10 * 1024 * 1024; // 10MB
+    if (file.size > maxSize) {
+      throw new Error(`File too large: ${(file.size / 1024 / 1024).toFixed(2)}MB (max 10MB)`);
+    }
 
-    console.log(`📤 Uploading ${file.name} to IPFS via server...`);
-    const result = await uploadFileToIPFS(buffer, file.name);
-    console.log(`✅ Upload successful: ${result.url}`);
+    console.log(`📤 [Client] Converting file to array...`);
+    console.log(`   File: ${file.name}`);
+    console.log(`   Size: ${(file.size / 1024).toFixed(2)}KB`);
+    
+    // Convert to ArrayBuffer then to Array (for serialization)
+    const arrayBuffer = await file.arrayBuffer();
+    const uint8Array = new Uint8Array(arrayBuffer);
+    const byteArray = Array.from(uint8Array);
+
+    console.log(`📤 [Client] Uploading to IPFS via server action...`);
+    const result = await uploadFileToIPFS(byteArray, file.name);
+    console.log(`✅ [Client] Upload successful: ${result.url}`);
 
     return result;
   } catch (error) {
-    console.error("Error uploading file to IPFS:", error);
+    console.error("❌ [Client] Error uploading file to IPFS:", error);
     throw error;
   }
 }
