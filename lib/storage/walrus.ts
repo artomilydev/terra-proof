@@ -32,7 +32,7 @@ export interface NFTMetadata {
  * Server Action: Upload file ke Walrus storage
  */
 export async function uploadFileToWalrus(
-  fileData: Buffer,
+  fileData: ArrayBuffer | Uint8Array | number[],
   fileName: string
 ): Promise<WalrusUploadResponse> {
   try {
@@ -43,12 +43,24 @@ export async function uploadFileToWalrus(
 
     console.log(`📤 [Walrus] Uploading ${fileName} to Walrus...`);
 
+    // Convert to Buffer properly for fetch
+    let buffer: Buffer;
+    if (Array.isArray(fileData)) {
+      buffer = Buffer.from(fileData);
+    } else if (fileData instanceof ArrayBuffer) {
+      buffer = Buffer.from(fileData);
+    } else if (fileData instanceof Uint8Array) {
+      buffer = Buffer.from(fileData);
+    } else {
+      buffer = Buffer.from(Object.values(fileData));
+    }
+
     const response = await fetch(`${publisherUrl}/v1/store`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/octet-stream",
       },
-      body: fileData,
+      body: buffer as any, // Cast to any to satisfy fetch body type
     });
 
     if (!response.ok) {
@@ -75,7 +87,7 @@ export async function uploadFileToWalrus(
     return {
       blobId,
       url,
-      size: blobInfo.blobObject.size || fileData.length,
+      size: blobInfo.blobObject.size || buffer.length,
     };
   } catch (error) {
     console.error("❌ [Walrus] Upload failed:", error);

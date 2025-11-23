@@ -1,7 +1,7 @@
 import { Transaction } from "@mysten/sui/transactions";
 import { SuiClient } from "@mysten/sui/client";
-import { NFTMetadata } from "./walrus";
 import { uploadFile, uploadMetadata } from "../storage";
+import type { NFTMetadata } from "../storage/walrus";
 
 // Package ID dari smart contract NFT yang sudah di-publish di Sui
 // Ini perlu diganti dengan package ID yang sebenarnya setelah deploy

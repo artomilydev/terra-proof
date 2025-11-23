@@ -1,19 +1,12 @@
 # TerraProof 🌍✈️
 
-**Blockchain-verified travel authenticity on Sui**
-
-> Complete documentation is in the `/docs` folder. Start with [`docs/README.md`](./docs/README.md)
+**TerraProof - Blockchain-verified travel authenticity on Sui**
 
 TerraProof is a Web3 platform where travelers can mint verifiable travel moments as NFTs on the **Sui blockchain**. Each proof is timestamped, geo-tagged, and stored using **IPFS/Walrus** decentralized storage.
 
 ## 🚀 Quick Links
 
-- **[Complete Documentation](./docs/README.md)** - Full project overview
-- **[Implementation Guide](./docs/IMPLEMENTATION.md)** - Setup & deployment steps
-- **[Quick Setup (5 min)](./docs/QUICK_SETUP.md)** - Pinata IPFS setup for development
-- **[Walrus Guide](./docs/WALRUS_SETUP.md)** - Walrus storage alternatives
-- **[IPFS Fix Guide](./docs/IPFS_FIX.md)** - Server Actions pattern explanation
-- **[Storage Configuration](./docs/STORAGE_SETUP.md)** - Complete storage setup
+- **[Deployment Guide](./DEPLOYMENT.md)** - Package ID, setup, and troubleshooting
 
 ## 🛠️ Quick Start
 
@@ -49,7 +42,3 @@ Open [http://localhost:3000](http://localhost:3000)
 ## 📄 License
 
 MIT License
-
----
-
-**👉 [Go to Full Documentation](./docs/README.md)**
