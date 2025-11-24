@@ -3,6 +3,7 @@
 
 import { uploadToWalrus, uploadMetadataWalrus } from "./walrus-client";
 import { uploadToIPFS, uploadMetadataIPFS } from "./ipfs-client";
+import { uploadToIPFSViaAPI, uploadMetadataViaAPI } from "./ipfs-api-client";
 import { testPinataConnection as testPinata } from "./ipfs";
 import type { WalrusUploadResponse, NFTMetadata } from "./walrus";
 import type { IPFSUploadResponse } from "./ipfs";
@@ -20,11 +21,15 @@ export interface StorageUploadResponse {
 const STORAGE_PROVIDER: StorageProvider =
   (process.env.NEXT_PUBLIC_STORAGE_PROVIDER as StorageProvider) || "ipfs";
 
+// Use API route for uploads (more reliable on Vercel)
+const USE_API_ROUTE = process.env.NEXT_PUBLIC_USE_API_ROUTE !== "false"; // default true
+
 /**
  * Upload file ke storage (auto-detect provider)
  */
 export async function uploadFile(file: File): Promise<StorageUploadResponse> {
   console.log(`📤 Uploading file to ${STORAGE_PROVIDER}...`);
+  console.log(`   Using API Route: ${USE_API_ROUTE}`);
 
   try {
     if (STORAGE_PROVIDER === "walrus") {
@@ -37,13 +42,26 @@ export async function uploadFile(file: File): Promise<StorageUploadResponse> {
       };
     } else {
       // Default: IPFS
-      const result = await uploadToIPFS(file);
-      return {
-        id: result.ipfsHash,
-        url: result.url,
-        size: result.size,
-        provider: "ipfs",
-      };
+      // Use API route for better reliability on Vercel
+      if (USE_API_ROUTE) {
+        console.log(`   Using API route for upload...`);
+        const result = await uploadToIPFSViaAPI(file);
+        return {
+          id: result.ipfsHash,
+          url: result.url,
+          size: result.size,
+          provider: "ipfs",
+        };
+      } else {
+        console.log(`   Using Server Action for upload...`);
+        const result = await uploadToIPFS(file);
+        return {
+          id: result.ipfsHash,
+          url: result.url,
+          size: result.size,
+          provider: "ipfs",
+        };
+      }
     }
   } catch (error) {
     console.error(`❌ Failed to upload to ${STORAGE_PROVIDER}:`, error);
@@ -70,13 +88,23 @@ export async function uploadMetadata(
       };
     } else {
       // Default: IPFS
-      const result = await uploadMetadataIPFS(metadata);
-      return {
-        id: result.ipfsHash,
-        url: result.url,
-        size: result.size,
-        provider: "ipfs",
-      };
+      if (USE_API_ROUTE) {
+        const result = await uploadMetadataViaAPI(metadata);
+        return {
+          id: result.ipfsHash,
+          url: result.url,
+          size: result.size,
+          provider: "ipfs",
+        };
+      } else {
+        const result = await uploadMetadataIPFS(metadata);
+        return {
+          id: result.ipfsHash,
+          url: result.url,
+          size: result.size,
+          provider: "ipfs",
+        };
+      }
     }
   } catch (error) {
     console.error(`❌ Failed to upload metadata to ${STORAGE_PROVIDER}:`, error);
